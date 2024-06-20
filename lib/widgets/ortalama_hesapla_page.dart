@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dinamik_not/constarts/app_constrats.dart';
+import 'package:flutter_dinamik_not/widgets/ortalama_goster.dart';
 
 class OrtalamaHesaplaPage extends StatefulWidget {
   OrtalamaHesaplaPage({Key? key}) : super(key: key);
@@ -38,10 +39,7 @@ class _OrtalamaHesaplaPageState extends State<OrtalamaHesaplaPage> {
                 
                 Expanded(
                   flex: 1,
-                  child: Container(
-                    child: Text('Ortalama '),
-                    color: Colors.yellow,
-                  ),
+                  child: OrtalamaGoster(dersSayisi: 5, ortalama: 26.875754)
                 )
               ],
             ),
