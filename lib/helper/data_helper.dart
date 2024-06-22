@@ -1,15 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dinamik_not/model/ders.dart';
 
-class DataHelper{
-
-  static List<String> _tumDerslerinHarfleri(){
-    return ['AA','BA','BB','CB','CC','DC','DD','FD','FF'];
+class DataHelper {
+  static List<Ders> tumEklenenDersler = [];
+  static dersEkle(Ders ders) {
+    tumEklenenDersler.add(ders);
   }
 
+  static double ortalamaHesapla() {
+    double toplamNot = 0;
+    double toplamKredi = 0;
 
+    tumEklenenDersler.forEach((Element) {
+      toplamNot = toplamNot + (Element.krediDegeri * Element.harfDegeri);
+      toplamKredi += Element.krediDegeri;
+    });
+    return toplamNot / toplamKredi;
+  }
 
-  static double _harfiNotaCevir(String harf){
-    switch(harf){
+  static List<String> _tumDerslerinHarfleri() {
+    return ['AA', 'BA', 'BB', 'CB', 'CC', 'DC', 'DD', 'FD', 'FF'];
+  }
+
+  static double _harfiNotaCevir(String harf) {
+    switch (harf) {
       case 'AA':
         return 4;
       case 'BA':
@@ -34,23 +48,28 @@ class DataHelper{
   }
 
   static List<DropdownMenuItem<double>> tumDersHarfleri() {
-    return _tumDerslerinHarfleri().map(
-      (e)=> DropdownMenuItem(
-        child: Text(e),
-        value: _harfiNotaCevir(e),
-      ),
-    ).toList();
+    return _tumDerslerinHarfleri()
+        .map(
+          (e) => DropdownMenuItem(
+            child: Text(e),
+            value: _harfiNotaCevir(e),
+          ),
+        )
+        .toList();
   }
-    static List<int> _tumkrediler() {
-    return List.generate(10, (index) => index + 1).toList();
-    }
 
-    static List<DropdownMenuItem<double>> tumDerslerinKredileri(){
-      return _tumkrediler().map(
-        (e) => DropdownMenuItem(
-          child: Text(e.toString()),
+  static List<int> _tumkrediler() {
+    return List.generate(10, (index) => index + 1).toList();
+  }
+
+  static List<DropdownMenuItem<double>> tumDerslerinKredileri() {
+    return _tumkrediler()
+        .map(
+          (e) => DropdownMenuItem(
+            child: Text(e.toString()),
             value: e.toDouble(),
-            ),
-            ).toList();
-    }
+          ),
+        )
+        .toList();
+  }
 }
