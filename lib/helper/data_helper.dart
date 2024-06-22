@@ -6,6 +6,8 @@ class DataHelper{
     return ['AA','BA','BB','CB','CC','DC','DD','FD','FF'];
   }
 
+
+
   static double _harfiNotaCevir(String harf){
     switch(harf){
       case 'AA':
@@ -39,4 +41,16 @@ class DataHelper{
       ),
     ).toList();
   }
+    static List<int> _tumkrediler() {
+    return List.generate(10, (index) => index + 1).toList();
+    }
+
+    static List<DropdownMenuItem<double>> tumDerslerinKredileri(){
+      return _tumkrediler().map(
+        (e) => DropdownMenuItem(
+          child: Text(e.toString()),
+            value: e.toDouble(),
+            ),
+            ).toList();
+    }
 }

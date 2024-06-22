@@ -16,7 +16,8 @@ class OrtalamaHesaplaPage extends StatefulWidget {
 class _OrtalamaHesaplaPageState extends State<OrtalamaHesaplaPage> {
   var formKey = GlobalKey<FormState>();
 
-    double secilenDeger=4;
+  double secilenHarfDeger = 4;
+  double secilenKrediDeger = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,12 +38,10 @@ class _OrtalamaHesaplaPageState extends State<OrtalamaHesaplaPage> {
                 Expanded(
                   flex: 2,
                   child: _buildForm(),
-                  ),
-                
+                ),
                 Expanded(
-                  flex: 1,
-                  child: OrtalamaGoster(dersSayisi: 5, ortalama: 26.875754)
-                )
+                    flex: 1,
+                    child: OrtalamaGoster(dersSayisi: 5, ortalama: 26.875754))
               ],
             ),
             Expanded(
@@ -60,56 +59,94 @@ class _OrtalamaHesaplaPageState extends State<OrtalamaHesaplaPage> {
       key: formKey,
       child: Column(
         children: [
-          _builTextFormField(),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8),
+            child: _builTextFormField(),
+          ),
+          SizedBox(
+            height: 5,
+          ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildHarfler(),
-              IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.ac_unit),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: _buildHarfler(),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 8),
+                  child: _buildKrediler(),
+                ),
               ),
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.ac_unit),
+                icon: Icon(Icons.arrow_forward_ios_sharp),
+                color: Sabitler.anaRenk,
+                iconSize: 30,
               ),
-              ],
-          )
+            ],
+          ),
+          SizedBox(height: 5),
         ],
       ),
     );
   }
-  
+
   _builTextFormField() {
     return TextFormField(
       decoration: InputDecoration(
-        hintText: 'Matematik',
-        border: OutlineInputBorder( borderRadius:Sabitler.borderRadius),
-        filled: true,
-        fillColor: Sabitler.anaRenk.shade100.withOpacity(0.2)
-      ),
-      
+          hintText: 'Matematik',
+          border: OutlineInputBorder(
+              borderRadius: Sabitler.borderRadius, borderSide: BorderSide.none),
+          filled: true,
+          fillColor: Sabitler.anaRenk.shade100.withOpacity(0.2)),
     );
   }
-  
+
   _buildHarfler() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 16,vertical: 8),
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Sabitler.anaRenk.shade100.withOpacity(0.1),
-        borderRadius: Sabitler.borderRadius
-      ),
+          color: Sabitler.anaRenk.shade100.withOpacity(0.1),
+          borderRadius: Sabitler.borderRadius),
       child: DropdownButton<double>(
-        value: secilenDeger,
+        value: secilenHarfDeger,
         elevation: 16,
         iconEnabledColor: Sabitler.anaRenk.shade200,
-        onChanged: (deger){
+        onChanged: (deger) {
           setState(() {
-            secilenDeger=deger!;
+            secilenHarfDeger = deger!;
           });
         },
         underline: Container(),
         items: DataHelper.tumDersHarfleri(),
+      ),
+    );
+  }
+
+  _buildKrediler() {
+    return Container(
+      alignment: Alignment.center,
+      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      decoration: BoxDecoration(
+          color: Sabitler.anaRenk.shade100.withOpacity(0.1),
+          borderRadius: Sabitler.borderRadius),
+      child: DropdownButton<double>(
+        value: secilenKrediDeger,
+        elevation: 16,
+        iconEnabledColor: Sabitler.anaRenk.shade200,
+        onChanged: (deger) {
+          setState(() {
+            secilenKrediDeger = deger!;
+          });
+        },
+        underline: Container(),
+        items: DataHelper.tumDerslerinKredileri(),
       ),
     );
   }
