@@ -52,7 +52,14 @@ class _OrtalamaHesaplaPageState extends State<OrtalamaHesaplaPage> {
               ],
             ),
             Expanded(
-              child: DersListesi(),
+              child: DersListesi(
+                onDismiss: (index){
+                  DataHelper.tumEklenenDersler.removeAt(index);
+                  setState(() {
+                    
+                  });
+                },
+              ),
               ),
             
           ],
